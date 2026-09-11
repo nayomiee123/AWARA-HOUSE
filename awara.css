@@ -1,0 +1,925 @@
+
+:root {
+  --primary-color: #173F35;   /* Deep Green */
+  --cream: #FFF7E8;           /* Cream background */
+  --gold: #E6A93A;            /* Golden Yellow accent */
+  --brown: #3A2417;           /* Dark Brown text */
+  --white: #FFFFFF;
+
+  --font-heading: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+
+  --radius-lg: 28px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+
+  --shadow-soft: 0 12px 30px rgba(58, 36, 23, 0.12);
+  --shadow-lift: 0 18px 40px rgba(23, 63, 53, 0.18);
+
+  --max-width: 1180px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.35s ease;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* padding/border no longer add to an element's width */
+}
+
+html {
+  scroll-behavior: smooth; /* smooth scroll when clicking nav links */
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--brown);
+  background-color: var(--cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  line-height: 1.15;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Visible focus outline for keyboard users, on every focusable element */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.section-heading {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 3rem;
+}
+
+/* A shared max-width wrapper used by most sections so content
+   doesn't stretch edge-to-edge on very wide screens. */
+section {
+  padding: 5rem 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 999px; /* fully rounded "pill" shape */
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.btn--primary {
+  background-color: var(--gold);
+  color: var(--brown);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--cream);
+  border-color: var(--cream);
+}
+
+.btn--ghost:hover {
+  background-color: var(--cream);
+  color: var(--primary-color);
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn--outline:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn--small {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--cream);
+  box-shadow: 0 2px 12px rgba(58, 36, 23, 0.08);
+}
+
+.navbar__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+}
+
+.navbar__logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--primary-color);
+}
+
+/* The logo still needs SOME visible focus state for keyboard users —
+   just a quieter one than the box outline other elements get, since a
+   thick rectangle around a wordmark looks like a rendering glitch. */
+.navbar__logo:focus-visible {
+  outline: none;
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-decoration-thickness: 3px;
+}
+
+.navbar__nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar__nav a {
+  font-weight: 500;
+  color: var(--brown);
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* An underline that grows in from the left on hover, instead of
+   just appearing — a small, deliberate motion detail. */
+.navbar__nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--gold);
+  transition: width var(--transition-fast);
+}
+
+.navbar__nav a:hover::after {
+  width: 100%;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Hamburger icon: three stacked spans styled as lines.
+   Hidden by default; media query below reveals it on mobile. */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* When JavaScript adds this class, the three lines animate into an X */
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(8.5px) rotate(45deg);
+}
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.hero__eyebrow {
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hero__headline {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  margin-bottom: 1.2rem;
+}
+
+.hero__subheading {
+  font-size: 1.15rem;
+  max-width: 42ch;
+  margin-bottom: 2rem;
+  color: var(--brown);
+}
+
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero__actions .btn--ghost {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.hero__actions .btn--ghost:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.hero__media {
+  position: relative;
+}
+
+.hero__image-frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+  aspect-ratio: 4 / 5;
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Decorative background shapes. aria-hidden in the HTML keeps
+   screen readers from announcing them since they add nothing
+   but visual texture. */
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.hero__blob--one {
+  width: 180px;
+  height: 180px;
+  background-color: var(--gold);
+  opacity: 0.35;
+  top: -40px;
+  right: -40px;
+}
+
+.hero__blob--two {
+  width: 120px;
+  height: 120px;
+  background-color: var(--primary-color);
+  opacity: 0.15;
+  bottom: -30px;
+  left: -30px;
+}
+
+.hero__badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: -1.5rem;
+  background-color: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.2rem;
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.hero__badge-number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.hero__badge-label {
+  font-size: 0.75rem;
+  color: var(--brown);
+}
+
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.about__image img {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.about__text h2 {
+  margin-bottom: 1.2rem;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+.about__text p {
+  margin-bottom: 1.2rem;
+}
+
+.about__text .btn {
+  margin-top: 0.5rem;
+}
+
+
+.why {
+  background-color: var(--primary-color);
+}
+
+.why .section-heading {
+  color: var(--cream);
+}
+
+.why__grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.why-card {
+  background-color: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 2.2rem 1.8rem;
+  text-align: center;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lift);
+}
+
+.why-card__icon {
+  font-size: 2.2rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.why-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+
+.menu {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.menu__filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.filter-btn {
+  background: none;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.filter-btn:hover {
+  background-color: rgba(23, 63, 53, 0.08);
+}
+
+/* Added by JavaScript to whichever filter is currently selected */
+.filter-btn.is-active {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.menu__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.food-card {
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-fast);
+}
+
+.food-card:hover {
+  transform: translateY(-6px);
+}
+
+.food-card__image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.food-card__body {
+  padding: 1.4rem;
+}
+
+.food-card__body h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.food-card__body p {
+  font-size: 0.92rem;
+  margin-bottom: 1rem;
+  min-height: 3em;
+}
+
+.food-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.food-card__price {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Hidden by JavaScript when a card doesn't match the active filter */
+.food-card.is-hidden {
+  display: none;
+}
+
+
+.cart {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cart__box {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.cart__list {
+  margin-bottom: 1.5rem;
+}
+
+.cart__empty {
+  text-align: center;
+  color: rgba(58, 36, 23, 0.6);
+  padding: 1rem 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(58, 36, 23, 0.1);
+}
+
+.cart-item__name {
+  font-weight: 600;
+  flex: 1;
+}
+
+.cart-item__price {
+  color: var(--primary-color);
+  font-weight: 600;
+  min-width: 80px;
+  text-align: right;
+}
+
+.cart-item__qty {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  background-color: transparent;
+  color: var(--primary-color);
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.qty-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.cart-item__remove {
+  background: none;
+  border: none;
+  color: #a4453a;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.cart__total-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  padding: 1rem 0;
+  border-top: 2px solid var(--cream);
+  margin-bottom: 1.2rem;
+}
+
+.cart__note {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--primary-color);
+  min-height: 1.4em;
+}
+
+
+.process {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.process__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 2rem;
+}
+
+.process-step {
+  position: relative;
+  padding-left: 0.2rem;
+  /* Visible by default. JavaScript is the ONLY thing that adds
+     .will-animate below — so if JS ever fails to run, these steps
+     simply appear normally instead of staying invisible forever. */
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Starting (hidden) state for the scroll-reveal animation.
+   Only applied by JavaScript, right before the step scrolls into view. */
+.process-step.will-animate {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.process-step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.process-step__number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.process-step h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
+
+.featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  background-color: var(--brown);
+  color: var(--cream);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.featured__image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.featured__content {
+  padding: 3rem;
+}
+
+.featured__content h2 {
+  color: var(--cream);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 1rem;
+}
+
+.featured__content p {
+  margin-bottom: 1.5rem;
+  color: rgba(255, 247, 232, 0.85);
+}
+
+
+.testimonials {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.testimonial-card {
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.testimonial-card p {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.testimonial-card cite {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-style: normal;
+}
+
+
+.contact {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.contact__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 3rem;
+}
+
+.contact__details h3 {
+  font-size: 1.05rem;
+  margin-top: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.contact__details h3:first-child {
+  margin-top: 0;
+}
+
+.contact__form {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 2px solid rgba(23, 63, 53, 0.15);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background-color: var(--cream);
+  transition: border-color var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+}
+
+.contact__note {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--primary-color);
+  min-height: 1.4em;
+}
+
+
+.footer {
+  background-color: var(--primary-color);
+  color: var(--cream);
+  padding: 3.5rem 1.5rem 1.5rem;
+}
+
+.footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 247, 232, 0.15);
+}
+
+.footer__logo {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.footer__tagline {
+  color: rgba(255, 247, 232, 0.75);
+  margin-bottom: 1.2rem;
+  max-width: 30ch;
+}
+
+.footer__socials {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.footer__socials a {
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.footer__socials a:hover {
+  color: var(--gold);
+}
+
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.footer__nav a:hover {
+  color: var(--gold);
+}
+
+.footer__copyright {
+  text-align: center;
+  padding-top: 1.5rem;
+  font-size: 0.85rem;
+  color: rgba(255, 247, 232, 0.6);
+}
+
+
+
+/* ---- Tablet (screens 1024px and below) ---- */
+@media (max-width: 1024px) {
+  .hero,
+  .about,
+  .featured,
+  .contact__wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__media {
+    order: -1; /* show the image above the text on smaller screens */
+  }
+
+  .why__grid,
+  .testimonials__grid,
+  .process__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featured__content {
+    padding: 2.5rem 1.8rem;
+  }
+}
+
+/* ---- Mobile (screens 768px and below) ---- */
+@media (max-width: 768px) {
+  .navbar__nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--cream);
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    box-shadow: 0 12px 20px rgba(58, 36, 23, 0.08);
+    transition: max-height var(--transition-normal);
+  }
+
+  /* JavaScript toggles this class on the nav to slide it open */
+  .navbar__nav.is-open {
+    max-height: 320px;
+  }
+
+  .navbar__nav a {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .navbar__actions .btn--small {
+    display: none; /* keep the mobile header simple; Order Now lives in the hero */
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .why__grid,
+  .testimonials__grid,
+  .process__list {
+    grid-template-columns: 1fr;
+  }
+
+  section {
+    padding: 3.5rem 1.2rem;
+  }
+
+  .hero__badge {
+    left: 1rem;
+  }
+}

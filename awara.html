@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Awara House brings crispy, spicy, unforgettable soybean Awara to Uyo, Akwa Ibom. Order fresh Awara today." />
+    <title>Awara House | A Taste of the North, Right Here in Akwa Ibom</title>
+    <link rel="stylesheet" href="awara.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+      <header class="navbar" id="navbar">
+              <div class="navbar__inner">
+      <a href="#home" class="navbar__logo">Awara House</a>
+ 
+      <nav class="navbar__nav" id="navMenu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#how-its-made">How It's Made</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+ 
+      <div class="navbar__actions">
+        <button class="btn btn--primary btn--small" id="orderNowNavBtn">Order Now</button>
+ 
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+ 
+  <main>
+ 
+   
+    <section class="hero" id="home">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Fresh from Uyo, Akwa Ibom</p>
+        <h1 class="hero__headline">Crispy. Spicy.<br>Unforgettable.</h1>
+        <p class="hero__subheading">Discover Awara; a delicious Nigerian soybean snack, freshly prepared and packed with flavour.</p>
+        <div class="hero__actions">
+          <button class="btn btn--primary" id="heroOrderBtn">Order Now</button>
+          <a href="#about" class="btn btn--ghost">Discover Awara</a>
+        </div>
+      </div>
+ 
+      <div class="hero__media">
+        <div class="hero__image-frame">
+          <img src="images/hero-awara.png" alt="A plate of golden fried Awara served with pepper sauce" class="hero__image" />
+        </div>
+        <div class="hero__blob hero__blob--one" aria-hidden="true"></div>
+        <div class="hero__blob hero__blob--two" aria-hidden="true"></div>
+        <div class="hero__badge" aria-hidden="true">
+          <span class="hero__badge-number">100%</span>
+          <span class="hero__badge-label">Nigerian Soybeans</span>
+        </div>
+      </div>
+    </section>
+ 
+   
+    <section class="about" id="about">
+      <div class="about__image">
+        <img src="images/about-awara.png" alt="Close-up of freshly fried Awara pieces" />
+      </div>
+ 
+      <div class="about__text">
+        <h2>Never Heard of Awara?</h2>
+        <p>
+          Awara is a Nigerian soybean-based food made much the same way tofu is.
+          It is soaked, blended, curdled and pressed, then cut into pieces and fried
+          until the outside turns a deep golden brown while the inside stays
+          soft and light.
+        </p>
+        <p>
+          It's especially popular in Northern Nigeria, where it's sold hot off
+          the fire as a street snack. At Awara House, we've brought that same
+          soulful, home-style Awara down to Uyo, so you don't have to travel
+          up North to taste it.
+        </p>
+        <button class="btn btn--outline">Learn More</button>
+      </div>
+    </section>
+ 
+   
+    <section class="why" id="why">
+      <h2 class="section-heading">Why You'll Love Awara</h2>
+ 
+      <div class="why__grid">
+        <div class="why-card">
+          <span class="why-card__icon" aria-hidden="true">🌱</span>
+          <h3>Soybean Goodness</h3>
+          <p>Made from 100% natural soybeans, Awara is a wholesome, plant-based snack you can feel good about.</p>
+        </div>
+ 
+        <div class="why-card">
+          <span class="why-card__icon" aria-hidden="true">🔥</span>
+          <h3>Freshly Fried</h3>
+          <p>We fry every batch to order, so what reaches you is always hot, crispy and never sitting around.</p>
+        </div>
+ 
+        <div class="why-card">
+          <span class="why-card__icon" aria-hidden="true">🇳🇬</span>
+          <h3>Made With Nigerian Flavour</h3>
+          <p>Our pepper sauce and spice blends are rooted in real Nigerian kitchens, not imitations.</p>
+        </div>
+      </div>
+    </section>
+ 
+ 
+    <section class="menu" id="menu">
+      <h2 class="section-heading">Pick Your Favourite</h2>
+ 
+      <div class="menu__filters" id="menuFilters">
+        <button class="filter-btn is-active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="classic">Classic</button>
+        <button class="filter-btn" data-filter="spicy">Spicy</button>
+        <button class="filter-btn" data-filter="combo">Combo</button>
+      </div>
+ 
+      <div class="menu__grid" id="menuGrid">
+        <!-- Each card has a data-category attribute so JavaScript can filter it -->
+        <article class="food-card" data-category="classic" data-id="classic-awara">
+          <img src="images/menu-classic-awara.png" alt="Classic Awara with pepper sauce" class="food-card__image" />
+          <div class="food-card__body">
+            <h3>Classic Awara</h3>
+            <p>Crispy golden Awara served with our signature pepper sauce.</p>
+            <div class="food-card__footer">
+              <span class="food-card__price">₦1,500</span>
+              <button class="btn btn--small btn--primary add-to-order-btn"
+                data-name="Classic Awara" data-price="1500">Add to Order</button>
+            </div>
+          </div>
+        </article>
+ 
+        <article class="food-card" data-category="spicy" data-id="pepper-awara">
+          <img src="images/menu-pepper-awara.png" alt="Pepper Awara tossed in spicy sauce" class="food-card__image" />
+          <div class="food-card__body">
+            <h3>Pepper Awara</h3>
+            <p>Golden Awara tossed in a spicy, flavour-packed pepper sauce.</p>
+            <div class="food-card__footer">
+              <span class="food-card__price">₦1,800</span>
+              <button class="btn btn--small btn--primary add-to-order-btn"
+                data-name="Pepper Awara" data-price="1800">Add to Order</button>
+            </div>
+          </div>
+        </article>
+ 
+        <article class="food-card" data-category="spicy" data-id="awara-yaji">
+          <img src="images/hero-awara.png" alt="Awara served with yaji spice blend" class="food-card__image" />
+          <div class="food-card__body">
+            <h3>Awara &amp; Yaji</h3>
+            <p>Crispy Awara served with a bold Nigerian spice blend.</p>
+            <div class="food-card__footer">
+              <span class="food-card__price">₦1,700</span>
+              <button class="btn btn--small btn--primary add-to-order-btn"
+                data-name="Awara & Yaji" data-price="1700">Add to Order</button>
+            </div>
+          </div>
+        </article>
+ 
+        <article class="food-card" data-category="combo" data-id="awara-combo">
+          <img src="images/menu-awara-combo.png" alt="Awara combo with sauce and a drink" class="food-card__image" />
+          <div class="food-card__body">
+            <h3>Awara Combo</h3>
+            <p>Awara, signature sauce and a refreshing drink.</p>
+            <div class="food-card__footer">
+              <span class="food-card__price">₦2,500</span>
+              <button class="btn btn--small btn--primary add-to-order-btn"
+                data-name="Awara Combo" data-price="2500">Add to Order</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+ 
+
+    <section class="cart" id="cart">
+      <h2 class="section-heading">Your Order</h2>
+ 
+      <div class="cart__box">
+        <ul class="cart__list" id="cartList">
+          <li class="cart__empty" id="cartEmptyMessage">Your cart is empty. Add something tasty from the menu above!</li>
+        </ul>
+ 
+        <div class="cart__total-row">
+          <span>Total</span>
+          <span id="cartTotal">₦0</span>
+        </div>
+ 
+        <button class="btn btn--primary btn--full" id="placeOrderBtn">Place Order</button>
+        <p class="cart__note" id="orderSuccessMessage" role="status"></p>
+      </div>
+    </section>
+ 
+ 
+    <section class="process" id="how-its-made">
+      <h2 class="section-heading">From Soybeans to Awara</h2>
+ 
+      <ol class="process__list">
+        <li class="process-step">
+          <span class="process-step__number">01</span>
+          <h3>Soak</h3>
+          <p>Soybeans are soaked until they soften.</p>
+        </li>
+        <li class="process-step">
+          <span class="process-step__number">02</span>
+          <h3>Blend</h3>
+          <p>The softened soybeans are blended with water.</p>
+        </li>
+        <li class="process-step">
+          <span class="process-step__number">03</span>
+          <h3>Extract</h3>
+          <p>The mixture is strained to separate the soy milk.</p>
+        </li>
+        <li class="process-step">
+          <span class="process-step__number">04</span>
+          <h3>Curdle</h3>
+          <p>A coagulant is added and the soy milk separates into curds.</p>
+        </li>
+        <li class="process-step">
+          <span class="process-step__number">05</span>
+          <h3>Press</h3>
+          <p>The curds are pressed to remove excess water.</p>
+        </li>
+        <li class="process-step">
+          <span class="process-step__number">06</span>
+          <h3>Fry</h3>
+          <p>The Awara is cut into pieces and fried until golden.</p>
+        </li>
+      </ol>
+    </section>
+ 
+  
+    <section class="featured">
+      <div class="featured__image">
+        <img src="images/menu-classic-awara.png" alt="Golden fried Awara close-up" />
+      </div>
+      <div class="featured__content">
+        <h2>One Bite. Then Another.</h2>
+        <p>Golden on the outside, soft on the inside and packed with flavour.</p>
+        <button class="btn btn--primary" id="featuredOrderBtn">Try Awara Today</button>
+      </div>
+    </section>
+
+    <section class="testimonials" id="reviews">
+      <h2 class="section-heading">People Are Talking</h2>
+ 
+      <div class="testimonials__grid">
+        <blockquote class="testimonial-card">
+          <p>"I had never tried Awara before. Now I'm wondering why I waited this long."</p>
+          <cite>— Goodseed, Uyo</cite>
+        </blockquote>
+ 
+        <blockquote class="testimonial-card">
+          <p>"The peppered Awara is seriously addictive."</p>
+          <cite>— Gideon, Uyo</cite>
+        </blockquote>
+ 
+        <blockquote class="testimonial-card">
+          <p>"Finally, something different from the usual snacks around here."</p>
+          <cite>— Elias, Uyo</cite>
+        </blockquote>
+      </div>
+    </section>
+ 
+  
+    <section class="contact" id="contact">
+      <h2 class="section-heading">Come Get Your Awara</h2>
+ 
+      <div class="contact__wrapper">
+        <div class="contact__details">
+          <h3>Visit Us</h3>
+          <p>Uyo, Akwa Ibom, Nigeria</p>
+ 
+          <h3>Call Or Email</h3>
+          <p>081 0731 3899<br>naomieffiong86@gmail.com</p>
+ 
+          <h3>Opening Hours</h3>
+          <p>Monday – Saturday<br>10:00 AM – 8:00 PM</p>
+        </div>
+ 
+        <form class="contact__form" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+ 
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+ 
+          <div class="form-group">
+            <label for="orderChoice">Choose Your Order</label>
+            <select id="orderChoice" name="orderChoice">
+              <option value="Classic Awara">Classic Awara</option>
+              <option value="Pepper Awara">Pepper Awara</option>
+              <option value="Awara & Yaji">Awara & Yaji</option>
+              <option value="Awara Combo">Awara Combo</option>
+            </select>
+          </div>
+ 
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+          </div>
+ 
+          <button type="submit" class="btn btn--primary btn--full">Send Order</button>
+          <p class="contact__note" id="contactSuccessMessage" role="status"></p>
+        </form>
+      </div>
+    </section>
+ 
+  </main>
+ 
+  
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <p class="footer__logo">Awara House</p>
+        <p class="footer__tagline">A taste of the North, right here in Akwa Ibom.</p>
+ 
+        <div class="footer__socials">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="X">X</a>
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="TikTok">TikTok</a>
+        </div>
+      </div>
+ 
+      <nav class="footer__nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#how-its-made">How It's Made</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+ 
+    <p class="footer__copyright">&copy; 2026 Awara House.</p>
+  </footer>
+ 
+  <script src="awara.js"></script>
+</body>
+</html>
