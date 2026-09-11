@@ -171,8 +171,22 @@ section {
 }
 
 .navbar__nav {
-  display: flex;
-  gap: 2rem;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--cream);
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  max-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 12px 20px rgba(58, 36, 23, 0.08);
+  transition: max-height var(--transition-normal);
+
+  .navbar__nav.is-open {
+  max-height: calc(100vh - 70px);
 }
 
 .navbar__nav a {
